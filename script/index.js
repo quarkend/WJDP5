@@ -1,4 +1,5 @@
-const apiUrl = "http://localhost:3000/api/teddies";
+/*
+const apiUrl = 'http://localhost:3000/api/teddies?';
 
 //fonction apppel des ours
 async function askTeddies() {
@@ -44,12 +45,12 @@ function createHtmlForProduct(product){
    
     const h2 = document.createElement('h2')
     h2.textContent = product.name;
-   
+    
     const p = document.createElement('p')
     p.classList.add('moreInfo')
    
+    p.textContent= product.price;   
     p.textContent= product.description;   
-   
     const button = document.createElement('button')
     button.classList.add('btn')
     button.textContent= 'Click to read  more about me '
@@ -93,13 +94,7 @@ askAndCreateTeddies();
 <p class="card-text">Lorem ipsum amet.</p>
 </div>*/
 
-
-
-
-
-
-
-
+//const { response } = require("express")
 
 // {/* <div class=""> */}
 // {/* <div class="card h-100"> */}
@@ -113,4 +108,37 @@ askAndCreateTeddies();
 //     </p>
 //   </div>
 // {/* </div> */}
-// {/* </div> */}
+// {/* </div> */}*/
+const apiUrl = "http://localhost:3000/api/teddies"
+/* permet de recuperer les produits depuis le serveur*/
+fetch(apiUrl)
+.then((response) => response.json())
+.then(products => {
+    console.log(products)
+    askTeddies(products);
+})
+.catch(e => displayError());
+
+/* 
+Affichage de tous les produits sous forme de liste 
+À l'aide de la balise <a> : envoi de l'id du produit sélectionné vers la page product.html
+*/
+function askTeddies(products) {
+
+    const productList = document.getElementById("productList"); 
+
+    products.forEach( product => {
+
+        productList.insertAdjacentHTML("beforeend",`
+            <li class="product">
+                <h2 class="product__name">${product.name}</h2>
+                <img class="product__img" src="${product.imageUrl}" alt="Photo Teddy">
+                <div class="product__price">${(product.price).toFixed(2).replace(".",",")}€</div>
+                <a class="product__btn" href="../pages/produit.html?${product._id}">Voir l'offre</a>
+              
+            </li>
+     `
+     )
+     
+ });
+}
