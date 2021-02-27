@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
+  <script src="https://kit.fontawesome.com/746b2bc6da.js" crossorigin="anonymous"></script>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -30,9 +31,15 @@
                   d="M7 8V6a5 5 0 1 1 10 0v2h3a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3zm0 2H5v10h14V10h-2v2h-2v-2H9v2H7v-2zm2-2h6V6a3 3 0 0 0-6 0v2z">
                 </path>
               </g>
-            </svg> <span class="small">(0)</span></a>
+            </svg> <span class="small addToCart">(0)</span></a>
+          <div class="cart__nb"></div>
         </li>
-        <li class="nav-item">
+        <!-- nwe -->
+
+
+        <!-- User  -->
+        <li class="nav-item ">
+          <a href="#"><i class="fas fa-user nav-link px-lg-3 py-lg-4"></i></a>
         </li>
       </ul>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-3"
@@ -43,6 +50,7 @@
         <ul class="ml-auto navbar-nav">
           <li class="nav-item active">
             <a class="nav-link px-lg-3 py-lg-4" href="../index.html">Accueil <span class="sr-only">(current)</span></a>
+
           </li>
           <li class="nav-item">
           </li>
@@ -59,8 +67,9 @@
   <main class="container">
     <section id="main-products" class="row d-flex justify-content-center">
       <div id="product-card" class="col-sm-6 col-md-4 ">
-        <article class=" card nav-bg-color  border-dark">
-          <img id="img-product" class="img-top" src="../images/teddy_1.jpg" alt="">
+        <article class=" card nav-bg-color  border-dark product-card ">
+          <!-- contenu génénré par le javascript produit.js -->
+          <!-- <img id="img-product" class="img-top" src="../images/teddy_1.jpg" alt="">
           <aside class="card-body">
             <h3 id="nom-product" class="card-title">
             </h3>
@@ -71,7 +80,7 @@
 
               <span class="text-add-panier">Ajouter au Panier</span>
             </button>
-          </aside>
+          </aside> -->
         </article>
       </div>
   </main>
@@ -105,7 +114,7 @@
 
   <!--     MY SCRIPT FRONT    -->
 
-  <script src=""></script>
+  <script src="../script/produit.js"></script>
 
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

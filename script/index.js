@@ -15,7 +15,7 @@ Affichage de tous les produits sous forme de liste
 */
 function askTeddies(products) {
 
-    const productCard = document.getElementById("productCard");
+    const productlist = document.getElementById("productlist");
 
     products.forEach(product => {
 

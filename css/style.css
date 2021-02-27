@@ -1,10 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap");
-
-body {
-  font-family: sans-serif;
-}
 
 .nav-bg-color {
   background-color: rgb(243, 233, 241) !important;
@@ -19,4 +13,19 @@ body {
   border-radius: 1rem;
 
   color: #444;
+}
+.show-cart li {
+  display: flex;
+}
+
+.show-cart li {
+  display: flex;
+}
+.card {
+  margin-bottom: 20px;
+}
+.card-img-top {
+  width: 200px;
+  height: 200px;
+  align-self: center;
 }
