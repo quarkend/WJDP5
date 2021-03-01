@@ -60,6 +60,11 @@ function displayCart() {
             <p class="cart-section__total">Total : ${(total / 100).toFixed(2).replace(".", ",")} €</p>
             <button class="cart-section__cancelCart">Annuler le panier</button>
         `);
+
+
+
+
+
 }
 
 
