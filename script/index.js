@@ -1,25 +1,19 @@
 
+
 const apiUrl = "http://localhost:3000/api/teddies"
 /* permet de recuperer les produits depuis le serveur*/
 fetch(apiUrl)
+
+
     .then((response) => response.json())
     .then(products => {
         console.log(products)
         askTeddies(products);
+
+
     })
-
-
-/* 
-Affichage de tous les produits sous forme de liste 
-À l'aide de la balise <a> : envoi de l'id du produit sélectionné vers la page product.html
-*/
-function askTeddies(products) {
-
-    const productlist = document.getElementById("productlist");
-
-    products.forEach(product => {
-
-        productlist.insertAdjacentHTML("beforeend", `
+function setProduct(product) {
+    return `
       
    <div id="product-card" class="col-sm-6 col-md-4 ">
         <article class=" card nav-bg-color  border-dark">
@@ -41,9 +35,29 @@ function askTeddies(products) {
           
         </div>
      `
+
+
+}
+
+/* 
+Affichage de tous les produits sous forme de liste 
+À l'aide de la balise <a> : envoi de l'id du produit sélectionné vers la page product.html
+*/
+function askTeddies(products) {
+
+    const productlist = document.getElementById("productlist");
+
+    products.forEach(product => {
+
+        productlist.insertAdjacentHTML("beforeend", setProduct(
+            product
+        )
         )
 
     });
+
+
+
 }
 /* <section id="main-product" class="row d-flex justify-content-center">
     <div id="product-card" class="col-sm-6 col-md-4 ">
