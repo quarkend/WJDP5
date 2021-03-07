@@ -68,6 +68,7 @@ function addToCart(product) {
     let saveToCart = {
         _id: product._id,
         name: product.name,
+        price: product.price,
         quantity: 1,
     }
     let newProduct = true;

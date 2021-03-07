@@ -18,10 +18,10 @@ function showCart() {
               <thead>
               <tr>
                 <th scope="col"> </th>
-                <th scope="col">Product</th>
-                <th scope="col">Available</th>
-                <th scope="col" class="text-center">Quantity</th>
-                <th scope="col" class="text-right">Price</th>
+                <th scope="col">Produit</th>
+                <th scope="col">prix</th>
+                <th scope="col" class="text-center">Quantite</th>
+                <th scope="col" class="text-right">supprimer</th>
                 <th> </th>
               </tr>
             </thead>
@@ -33,7 +33,7 @@ function showCart() {
 
         products.forEach((product, l) => {
 
-            total = total + (product.price * product.quantity);
+            total = total + isNaN(product.price * product.quantity) ? 0 : product.price * product.quantity;
 
             /* <td><input class="form-control" type="text" value="" />${l}</td>*/
             //   <td>In stock</td>
