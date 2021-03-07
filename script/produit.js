@@ -68,6 +68,7 @@ function addToCart(product) {
     let saveToCart = {
         _id: product._id,
         name: product.name,
+        quantity: 1,
     }
     let newProduct = true;
     // La méthode getItem() de l'interface Storage renvoie 
@@ -95,5 +96,5 @@ function addToCart(product) {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
 
-    checkCart();
+    reinisialiserCart();
 }
