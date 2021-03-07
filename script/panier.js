@@ -77,7 +77,7 @@ function showCart() {
             <p class="cart-section__empty">
                 Votre panier est vide ! 
                 <br/>
-                <a href="./index.html">Revenir à la page d'accueil</a>
+                <a href="../index.html">Revenir à la page d'accueil</a>
             </p>
         `)
     }
