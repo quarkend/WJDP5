@@ -25,14 +25,10 @@ function showCart() {
                 <th> </th>
               </tr>
             </thead>
-        
-                <tbody class="cart-section__tbody">
-             
-                </tbody>
+         <tbody class="cart-section__tbody">
+             </tbody>
             </table>
-   
-        `);
-
+    `);
         let tbody = document.querySelector(".cart-section__tbody");
 
         products.forEach((product, l) => {
@@ -55,12 +51,8 @@ function showCart() {
                 <td class="text-right"><button class="btn btn-sm btn-danger cart-section__delete product-${l}"><i class="fa fa-trash"></i> </button>
                 </td>
                     </tr>
-
-                  
             `);
         })
-
-
         section.insertAdjacentHTML("beforeend", `
             <p class="cart-section__total">Total : ${(total / 100).toFixed(2).replace(".", ",")} €</p>
             <button class="cart-section__cancelCart ">Annuler le panier</button>
@@ -90,10 +82,6 @@ function showCart() {
         `)
     }
 }
-
-
-
-
 /* Diminue de 1 la quantité d'un même produit. S'il passe à 0 alors le produit est supprimé du panier */
 function decrementerProduct(event, products) {
     let l = event.target.classList[1].slice(-1);
@@ -115,8 +103,13 @@ function decrementerProduct(event, products) {
     }
     refreshSectionAndCart();
 }
-
-
+/*Augmente de 1 la quantité d'un même produit. */
+function incrementerProduct(event, products) {
+    let l = event.target.classList[1].slice(-1);
+    products[l].quantity++;
+    localStorage.setItem('cartItems', JSON.stringify(products));
+    refreshSectionAndCart();
+}
 
 /* Réinitialise la section "cart-section" ainsi que le nombre de produits du panier (header) */
 function refreshSectionAndCart() {
