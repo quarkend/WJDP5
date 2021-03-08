@@ -59,12 +59,21 @@ function showCart() {
         `);
 
 
-        const supprimerBtn = document.querySelectorAll(".cart-section__remove");
-        supprimerBtn.forEach((btn) => {
+        const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
+        supprimerUnBtn.forEach((btn) => {
             btn.addEventListener('click', event => {
                 decrementerProduct(event, products);
             })
         })
+
+        const supprimerBtn = document.querySelectorAll(".cart-section__delete");
+        supprimerBtn.forEach((btn) => {
+            btn.addEventListener('click', event => {
+                supprimerProduct(event, products);
+            })
+        })
+
+
         const ajouter_produit_dans_panier = document.querySelectorAll(".cart-section__add");
         ajouter_produit_dans_panier.forEach((btn) => {
             btn.addEventListener('click', event => {
@@ -110,6 +119,24 @@ function incrementerProduct(event, products) {
     localStorage.setItem('cartItems', JSON.stringify(products));
     refreshSectionAndCart();
 }
+
+// Permet de supprimer le produit sélectionné.
+// On récupère l'index correspondant grâce au dernier caractère du nom de la classe.
+// On se sert ensuite de cet index pour supprimer le bon produit dans le tableau products du localStorage
+//  */
+function supprimerProduct(event, products) {
+    let l = event.target.classList[1].slice(-1);
+    products.splice(l, 1);
+    localStorage.setItem('cartItems', JSON.stringify(products));
+    if (products.length === 0) {
+        localStorage.removeItem('cartItems');
+    }
+    refreshSectionAndCart();
+}
+
+
+
+
 
 /* Réinitialise la section "cart-section" ainsi que le nombre de produits du panier (header) */
 function refreshSectionAndCart() {

@@ -36,8 +36,6 @@ function askTeddies(product) {
                  
              <button class="addToCart btn btn-success float-right ">Ajouter au panier<i class="fas fa-shopping-cart"></i>
              </button>
-  
-            </button>
                 </aside>
                 </article>  
                 </div>   `

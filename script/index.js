@@ -21,10 +21,10 @@ function setProduct(product) {
                 <aside class="card-body">
                     <h3 id="nom-product" class="card-title">${product.name}
                     </h3>
-                    <button class="btn btn-primary font-weight-bold">
+                    <div class="btn btn-primary font-weight-bold">
                         ${(product.price / 100).toFixed(2).replace(".", ",")}€
-                        </button>
-                    <button class="btn btn-success float-right font-weight-bold">
+                        </div>
+                    <button class="btn btn-danger float-right font-weight-bold">
 
          
            <a class="product__btn" href="../pages/produit.html?${product._id}">
