@@ -11,8 +11,8 @@ function reinisialiserCart() {
     if (localStorage.getItem('cartItems') !== null) {
         let cartp = JSON.parse(localStorage.getItem("cartItems"));
 
-        cartp.forEach((prod) => {
-            nb = nb + prod.quantity;
+        cartp.forEach((produit) => {
+            nb = nb + produit.quantity;
         });
     }
     div.textContent = nb;

@@ -33,7 +33,7 @@ function showCart() {
 
         products.forEach((product, l) => {
 
-            total = total + isNaN(product.price * product.quantity) ? 0 : product.price * product.quantity;
+            total = total + isNaN(product.price * product.quantity) ? 0 : (product.price * product.quantity);
 
             /* <td><input class="form-control" type="text" value="" />${l}</td>*/
             //   <td>In stock</td>
@@ -53,12 +53,93 @@ function showCart() {
                     </tr>
             `);
         })
+
+
+
+
+
         section.insertAdjacentHTML("beforeend", `
-            <p class="cart-section__total">Total : ${(total / 100).toFixed(2).replace(".", ",")} €</p>
-            <button class="cart-section__cancelCart ">Annuler le panier</button>
-        `);
+   <div class="row">
+        <div class="col-md-12 mt-3">
+          <h4>Votre commande</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+                        Nombre de produit(s) dans le panier : <span class="total-count"></span>
+          <br /><br />
+          <table width="100%" class="show-panier" id="product-card"></table>
+          <br />
+          <br />
+          <div>*Prix total: <b><span class="total-panier  cart-section__total" id="prix_total">${(total / 100).toFixed(2).replace(".", ",")} €</p></span></b></div>
+          <br />
+          <i id="livraison-detail">*Livraison incluse</i>
+          <div class="text-right"><button class="clear-panier cart-section__cancelCart btn btn-danger">Vider le panier</button></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <h4>Adresse de livraison</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <input class="form-control" type="text" name="nom" value="" id="nom" placeholder="Nom">
+          <br>
+          <input class="form-control" type="text" name="prenom" value="" id="prenom" placeholder="Prénom">
+          <br>
+          <input class="form-control" type="text" name="cp" value="" id="cp" placeholder="Code postal">
+          <br>
+          <input class="form-control" type="text" name="ville" value="" id="ville" placeholder="Ville">
+          <br>
+          <input class="form-control" type="text" name="email" value="" id="email" placeholder="e-Mail">
+          <br>
+          <textarea class="form-control" id="message" placeholder="Message Optionnel"></textarea>
+          <br>
+          <div class="text-right"><button type="button" class="btn btn-success" id="commander">Commander</button></div>
+          <br>
+          <div id="qte_minimum_report"></div>
+        </div>
+      </div>
+      <div class="modal" id="mymodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Commande confirmée</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="commande_report">Merci de votre commande</div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="mymodal_erreur" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Erreur de commande</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="commande_report">Une erreur est survenue</div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
+  `);
         const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
         supprimerUnBtn.forEach((btn) => {
             btn.addEventListener('click', event => {
@@ -70,8 +151,8 @@ function showCart() {
         supprimerBtn.forEach((btn) => {
             btn.addEventListener('click', event => {
                 supprimerProduct(event, products);
-            })
-        })
+            });
+        });
 
 
         const ajouter_produit_dans_panier = document.querySelectorAll(".cart-section__add");
@@ -80,6 +161,13 @@ function showCart() {
                 incrementerProduct(event, products);
             })
         })
+
+        const cancelCartBtn = document.querySelector(".cart-section__cancelCart");
+        cancelCartBtn.addEventListener('click', () => {
+            clearCart();
+        });
+
+
     } else {
         section.insertAdjacentHTML("afterbegin", `
             <h2>Panier</h2>
@@ -131,6 +219,13 @@ function supprimerProduct(event, products) {
     if (products.length === 0) {
         localStorage.removeItem('cartItems');
     }
+    refreshSectionAndCart();
+}
+
+
+/* Annulation de tout le panier */
+function clearCart() {
+    localStorage.removeItem('cartItems');
     refreshSectionAndCart();
 }
 

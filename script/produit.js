@@ -81,9 +81,9 @@ function addToCart(product) {
     else {
         cartItems = JSON.parse(localStorage.getItem('cartItems'));
 
-        cartItems.forEach((prod) => {
-            if (product._id === prod._id) {
-                prod.quantity++;
+        cartItems.forEach((produit) => {
+            if (product._id === produit._id) {
+                produit.quantity++;
                 newProduct = false;
             }
         })
