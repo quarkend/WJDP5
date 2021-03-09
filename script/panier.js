@@ -1,18 +1,18 @@
 const section = document.querySelector(".cart-section");
-let total = 0;
 
 showCart();
 
 /* Affichage du contenu du panier, des boutons de suppression et d'annulation du panier ainsi que du formulaire de contact */
 
 function showCart() {
+  let total = 0;
 
-    if (localStorage.getItem('cartItems') !== null) {
-        let products = JSON.parse(localStorage.getItem('cartItems'));
-        total = 0; // Réinitialisation du total à 0
-        // <tbody> : l'élément de corps d'un tableau
 
-        section.insertAdjacentHTML("afterbegin", `
+  if (localStorage.getItem('cartItems') !== null) {
+    let products = JSON.parse(localStorage.getItem('cartItems'));
+    // <tbody> : l'élément de corps d'un tableau
+
+    section.insertAdjacentHTML("afterbegin", `
             <h2>Teddies</h2>
             <table class="cart-section__table">
               <thead>
@@ -29,17 +29,17 @@ function showCart() {
              </tbody>
             </table>
     `);
-        let tbody = document.querySelector(".cart-section__tbody");
+    let tbody = document.querySelector(".cart-section__tbody");
 
-        products.forEach((product, l) => {
+    products.forEach((product, l) => {
 
-            total = total + isNaN(product.price * product.quantity) ? 0 : (product.price * product.quantity);
+      total = total + (parseInt(product.price) * parseInt(product.quantity));
 
-            /* <td><input class="form-control" type="text" value="" />${l}</td>*/
-            //   <td>In stock</td>
-            //        <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-            /* La classe product-l nous permet de garder la valeur de l'l du produit. Il sera récupéré dans la fonction deleteProduct */
-            tbody.insertAdjacentHTML("beforeend", `
+      /* <td><input class="form-control" type="text" value="" />${l}</td>*/
+      //   <td>In stock</td>
+      //        <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+      /* La classe product-l nous permet de garder la valeur de l'l du produit. Il sera récupéré dans la fonction deleteProduct */
+      tbody.insertAdjacentHTML("beforeend", `
                 <tr>
                     <td>${product.name}</td>
                
@@ -52,13 +52,13 @@ function showCart() {
                 </td>
                     </tr>
             `);
-        })
+    })
 
 
 
 
 
-        section.insertAdjacentHTML("beforeend", `
+    section.insertAdjacentHTML("beforeend", `
    <div class="row">
         <div class="col-md-12 mt-3">
           <h4>Votre commande</h4>
@@ -140,36 +140,36 @@ function showCart() {
     </div>
 
   `);
-        const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
-        supprimerUnBtn.forEach((btn) => {
-            btn.addEventListener('click', event => {
-                decrementerProduct(event, products);
-            })
-        })
+    const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
+    supprimerUnBtn.forEach((btn) => {
+      btn.addEventListener('click', event => {
+        decrementerProduct(event, products);
+      })
+    })
 
-        const supprimerBtn = document.querySelectorAll(".cart-section__delete");
-        supprimerBtn.forEach((btn) => {
-            btn.addEventListener('click', event => {
-                supprimerProduct(event, products);
-            });
-        });
-
-
-        const ajouter_produit_dans_panier = document.querySelectorAll(".cart-section__add");
-        ajouter_produit_dans_panier.forEach((btn) => {
-            btn.addEventListener('click', event => {
-                incrementerProduct(event, products);
-            })
-        })
-
-        const cancelCartBtn = document.querySelector(".cart-section__cancelCart");
-        cancelCartBtn.addEventListener('click', () => {
-            clearCart();
-        });
+    const supprimerBtn = document.querySelectorAll(".cart-section__delete");
+    supprimerBtn.forEach((btn) => {
+      btn.addEventListener('click', event => {
+        supprimerProduct(event, products);
+      });
+    });
 
 
-    } else {
-        section.insertAdjacentHTML("afterbegin", `
+    const ajouter_produit_dans_panier = document.querySelectorAll(".cart-section__add");
+    ajouter_produit_dans_panier.forEach((btn) => {
+      btn.addEventListener('click', event => {
+        incrementerProduct(event, products);
+      })
+    })
+
+    const cancelCartBtn = document.querySelector(".cart-section__cancelCart");
+    cancelCartBtn.addEventListener('click', () => {
+      clearCart();
+    });
+
+
+  } else {
+    section.insertAdjacentHTML("afterbegin", `
             <h2>Panier</h2>
             <p class="cart-section__empty">
                 Votre panier est vide ! 
@@ -177,35 +177,37 @@ function showCart() {
                 <a href="../index.html">Revenir à la page d'accueil</a>
             </p>
         `)
-    }
+  }
 }
 /* Diminue de 1 la quantité d'un même produit. S'il passe à 0 alors le produit est supprimé du panier */
 function decrementerProduct(event, products) {
-    let l = event.target.classList[1].slice(-1);
-    products[l].quantity--;
+  let l = event.target.classList[1].slice(-1);
+  products[l].quantity--;
 
-    if (products[l].quantity <= 0) {
-        // Array.prototype.splice()
-        // La méthode splice() modifie le contenu d'un tableau en retirant 
-        // des éléments et/ou en ajoutant de nouveaux éléments à même le tableau.
-        // On peut ainsi vider ou remplacer une partie d'un tableau.
-        products.splice(l, 1);
-        if (products.length === 0) {
-            localStorage.removeItem('cartItems');
-        } else {
-            localStorage.setItem('cartItems', JSON.stringify(products));
-        }
+  if (products[l].quantity <= 0) {
+    // Array.prototype.splice()
+    // La méthode splice() modifie le contenu d'un tableau en retirant 
+    // des éléments et/ou en ajoutant de nouveaux éléments à même le tableau.
+    // On peut ainsi vider ou remplacer une partie d'un tableau.
+    products.splice(l, 1);
+    if (products.length === 0) {
+      localStorage.removeItem('cartItems');
     } else {
-        localStorage.setItem('cartItems', JSON.stringify(products));
+      localStorage.setItem('cartItems', JSON.stringify(products));
     }
-    refreshSectionAndCart();
+  } else {
+    localStorage.setItem('cartItems', JSON.stringify(products));
+  }
+
+  console.log(localStorage.getItem('cartItems'))
+  refreshSectionAndCart();
 }
 /*Augmente de 1 la quantité d'un même produit. */
 function incrementerProduct(event, products) {
-    let l = event.target.classList[1].slice(-1);
-    products[l].quantity++;
-    localStorage.setItem('cartItems', JSON.stringify(products));
-    refreshSectionAndCart();
+  let l = event.target.classList[1].slice(-1);
+  products[l].quantity++;
+  localStorage.setItem('cartItems', JSON.stringify(products));
+  refreshSectionAndCart();
 }
 
 // Permet de supprimer le produit sélectionné.
@@ -213,20 +215,20 @@ function incrementerProduct(event, products) {
 // On se sert ensuite de cet index pour supprimer le bon produit dans le tableau products du localStorage
 //  */
 function supprimerProduct(event, products) {
-    let l = event.target.classList[1].slice(-1);
-    products.splice(l, 1);
-    localStorage.setItem('cartItems', JSON.stringify(products));
-    if (products.length === 0) {
-        localStorage.removeItem('cartItems');
-    }
-    refreshSectionAndCart();
+  let l = event.target.classList[1].slice(-1);
+  products.splice(l, 1);
+  localStorage.setItem('cartItems', JSON.stringify(products));
+  if (products.length === 0) {
+    localStorage.removeItem('cartItems');
+  }
+  refreshSectionAndCart();
 }
 
 
 /* Annulation de tout le panier */
 function clearCart() {
-    localStorage.removeItem('cartItems');
-    refreshSectionAndCart();
+  localStorage.removeItem('cartItems');
+  refreshSectionAndCart();
 }
 
 
@@ -235,7 +237,19 @@ function clearCart() {
 
 /* Réinitialise la section "cart-section" ainsi que le nombre de produits du panier (header) */
 function refreshSectionAndCart() {
-    section.innerHTML = "";
-    showCart();
-    reinisialiserCart();
+  section.innerHTML = "";
+  showCart();
+  reinisialiserCart();
 }
+
+
+// if (!localStorage.getItem('nom')) {
+//   setUserName();
+// } else {
+//   let storedName = localStorage.getItem('nom');
+//   myHeading.textContent = 'Mozilla est cool, ' + storedName;
+// }
+
+// myButton.addEventListener('click', function () {
+//   setUserName();
+// });

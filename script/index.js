@@ -41,7 +41,7 @@ function setProduct(product) {
 
 /* 
 Affichage de tous les produits sous forme de liste 
-À l'aide de la balise <a> : envoi de l'id du produit sélectionné vers la page product.html
+À l'aide de la balise <a> : envoi de l'id du produit sélectionné vers la page produit.html
 */
 function askTeddies(products) {
 
