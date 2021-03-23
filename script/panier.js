@@ -2,7 +2,7 @@ const section = document.querySelector(".cart-section");
 
 showCart();
 
-/* Affichage du contenu du panier, des boutons de suppression et d'annulation du panier ainsi que du formulaire forobjFormulaire */
+/* Affichage du contenu du panier, des boutons de suppression et d'annulation du panier ainsi que du formulaire forcontact */
 
 function showCart() {
   let total = 0;
@@ -89,27 +89,37 @@ function showCart() {
           <div class="text-right"><button class="clear-panier cart-section__cancelCart btn btn-danger">Vider le panier</button></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12 mt-3">
-          <h4>Adresse de livraison</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mt-3">
-        <form class="form-control" action="post" type="submit" >
-          <input class="form-control" type="text" name="prenom"  id="prenom" placeholder="Prénom">
-          <input class="form-control" type="text" name="email" value="" id="email" placeholder="e-Mail">
-          
-          <button id="submit-btn">Valider le panier</button>
-          <br>
-     
-        </div>
-      </div>
-      </form>
-     
 
   `
     );
+//     section.insertAdjacentHTML(
+//         "beforeend",` 
+//          <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
+//         <form class="cart-form" method="post">
+//           <div class="cart-form__group">
+//               <label for="firstname">Prénom : </label>
+//               <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}" required />
+//           </div>
+//           <div class="cart-form__group">
+//               <label for="name">Nom : </label>
+//               <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
+//           </div>
+//           <div class="cart-form__group">
+//               <label for="address">Adresse  : </label>
+//               <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
+//           </div>
+//           <div class="cart-form__group">
+//               <label for="city">Ville : </label>
+//               <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
+//           </div>
+//           <div class="cart-form__group">
+//               <label for="email">Email : </label>
+//               <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" placeholder="exemple@email.com" maxlength="30" required />
+//           </div>
+//          <button type="submit" id="submit-btn">Valider le panier</button>
+//       </form>
+// `
+//       );
     const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
     supprimerUnBtn.forEach((btn) => {
       btn.addEventListener("click", (event) => {
@@ -138,7 +148,7 @@ function showCart() {
       clearCart();
     });
 
-    const form = document.querySelector(".form-control");
+    const form = document.querySelector(".cart-form");
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       submitFormControl();
@@ -215,44 +225,73 @@ function refreshSectionAndCart() {
   reinisialiserCart();
 }
 
-// Récupération des valeurs de l'input dans l'objet objFormulaire
+// Récupération des valeurs de l'input dans l'objet contact
 // Récupération des id des produits du panier dans le tableau products
-// L'objet objFormulaire et le tableau products sont formattés en string avant d'être envoyé dans la fonction postCmd
+// L'objet contact et le tableau products sont formattés en string avant d'être envoyé dans la fonction postCmd
+
+// function submitFormControl() {
+//   let contact = {
+//     prenom: document.getElementById("prenom").value,
+//     nom: document.getElementById("nom").value,
+//     email: document.getElementById("email").value,
+//   };
+
+//   let products = [];
+//   if (localStorage.getItem("setItems") !== null) {
+//     let produitObj = JSON.parse(localStorage.getItem("setItems"));
+
+//     produitObj.forEach((produit) => {
+//       products.push(produit._id);
+//       console.log(produit._id);
+//     });
+//     console.log(postCmd(formulaireProduit));
+//   }
+
+//   let formulaireProduit = JSON.stringify({
+//     contact,
+//     products,
+//   });
+
+//   postCmd(formulaireProduit);
+// }
+
 
 function submitFormControl() {
-  let objFormulaire = {
-    prenom: document.getElementById("prenom").value,
-    nom: document.getElementById("nom").value,
-    email: document.getElementById("email").value,
-  };
-
-  let products = [];
-  if (localStorage.getItem("setItems") !== null) {
-    let produitObj = JSON.parse(localStorage.getItem("setItems"));
-
-    produitObj.forEach((produit) => {
-      products.push(produit._id);
-      console.log(produit._id);
+    let contact = {
+        firstName: document.getElementById("firstname").value,
+        lastName: document.getElementById("name").value,
+        address: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        email: document.getElementById("email").value,
+      };
+    let products = [];
+    if (localStorage.getItem("setItems") !== null) {
+      let produitObj = JSON.parse(localStorage.getItem("setItems"));
+  
+      produitObj.forEach((produit) => {
+        products.push(produit._id);
+        console.log(produit._id);
+      });
+      console.log(postCmd(formulaireProduit));
+    }
+  
+    let formulaireProduit = JSON.stringify({
+      contact,
+      products,
     });
-    console.log(postCmd(formulaireProduit));
+  
+    postCmd(formulaireProduit);
   }
-
-  let formulaireProduit = JSON.stringify({
-    objFormulaire,
-    products,
-  });
-
-  postCmd(formulaireProduit);
-}
+  
 
 /*
     Requête POST
-    Envoi au server l'objet objFormulaire et le tableau d'id products au format string
-    Enregistrement de l'objet objFormulaire reçus du serveur, le total de la commande sur le localStorage.
+    Envoi au server l'objet contact et le tableau d'id products au format string
+    Enregistrement de l'objet contact reçus du serveur, le total de la commande sur le localStorage.
     Changement de page -> confirmation.html
 */
 function postCmd(formulaireProduit) {
-  fetch("http://localhost:3000/api/teddies/posts/", {
+  fetch("http://localhost:3000/api/teddies/order/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -264,16 +303,31 @@ function postCmd(formulaireProduit) {
       return response.json();
     })
     .then((res) => {
-      localStorage.setItem("objFormulaire", JSON.stringify(res.objFormulaire));
+      localStorage.setItem("contact", JSON.stringify(res.contact));
       localStorage.setItem("total", JSON.stringify(total));
       localStorage.removeItem("setItems");
-      window.location.replace("../pages/confirmation.html");
+      window.location.replace("./confirmation.html");
     })
-    .catch((er) => {
+    .catch((e) => {
       displayError();
-      console.log(er);
+      console.log(e);
     });
 }
+
+// .then((res) => {
+//     localStorage.setItem("contact", JSON.stringify(res.contact));
+//     localStorage.setItem("total", JSON.stringify(total));
+//     localStorage.removeItem("setItems");
+//     window.location.replace("../pages/confirmation.html");
+//   })
+//   return res.status(201).json({
+//       contact: req.body.contact,
+//       products: teddies,
+   
+//     })
+// }
+
+
 
 // // Ajouter un événement ‘submit’à l'entrée du formulaire:
 // // Saisissez l'entrée du formulaire value:.
