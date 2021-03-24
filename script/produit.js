@@ -35,9 +35,9 @@ function askTeddies(product) {
                    <div class="btn btn-primary font-weight-bold">
                         ${(product.price / 100).toFixed(2).replace(".", ",")}€
                         </div>
-                 
-             <button class="addToCart btn btn-success float-right ">Ajouter au panier<i class="fas fa-shopping-cart"></i>
-             </button>
+                  <label for="color-select">Choisir une couleur</label>
+        <select class="product-section__select" name="colors" id="color-select"></select>
+        <button class="addToCart btn btn-success float-right">Ajouter au panier <i class="fas fa-shopping-cart"></i></button> 
                 </aside>
                 </article>  
                 </div>   `
@@ -47,7 +47,16 @@ function askTeddies(product) {
 
   /* Évènement "click" : lance la fonction d'ajout du produit au panier */
   addToCartBtn.addEventListener("click", () => {
+    let select = document.querySelector(".product-section__select");
+    product.selectedColor = select.options[select.selectedIndex].value;
     addToCart(product);
+  });
+  let select = document.querySelector(".product-section__select");
+  product.colors.forEach(function (color) {
+    let option = document.createElement("option");
+    option.value = color;
+    option.textContent = color;
+    select.appendChild(option);
   });
 }
 
@@ -64,6 +73,7 @@ function addToCart(product) {
     name: product.name,
     price: product.price,
     quantity: 1,
+    selectedColor: product.selectedColor,
   };
   let newProduct = true;
   // La méthode getItem() de l'interface Storage renvoie
@@ -75,14 +85,17 @@ function addToCart(product) {
   } else {
     panier = JSON.parse(localStorage.getItem("panier"));
 
-    panier.forEach((produit) => {
-      if (product._id === produit._id) {
-        produit.quantity++;
-        newProduct = false;
+    panier.forEach((pro) => {
+      if (
+        product._id === pro._id &&
+        product.selectedColor === pro.selectedColor
+      ) {
+        pro.quantity++;
+        newDifProduct = false;
       }
     });
 
-    if (newProduct) panier.push(saveToCart);
+    if (newDifProduct) panier.push(saveToCart);
     // La méthode setItem() de l'interface Storage, lorsque lui sont passées le duo clé-valeur, les ajoute à l'emplacement de stockage,
     // sinon elle met à jour la valeur si la clé existe déjà.
 
