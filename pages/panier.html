@@ -61,33 +61,61 @@
 
 
         <table class="table table-striped jumbotron text-center  section cart-section addToCart">
-       
+
 
         </table>
-        <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
+        <!-- <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
         <form class="cart-form" method="post">
           <div class="cart-form__group">
-              <label for="firstname">Prénom : </label>
-              <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}" required />
+            <label for="firstname">Prénom : </label>
+            <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}"
+              required />
           </div>
           <div class="cart-form__group">
-              <label for="name">Nom : </label>
-              <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
+            <label for="name">Nom : </label>
+            <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
           </div>
           <div class="cart-form__group">
-              <label for="address">Adresse  : </label>
-              <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
+            <label for="address">Adresse : </label>
+            <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
           </div>
           <div class="cart-form__group">
-              <label for="city">Ville : </label>
-              <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
+            <label for="city">Ville : </label>
+            <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
           </div>
           <div class="cart-form__group">
-              <label for="email">Email : </label>
-              <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" placeholder="exemple@email.com" maxlength="30" required />
+            <label for="email">Email : </label>
+            <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}"
+              placeholder="exemple@email.com" maxlength="30" required />
           </div>
-         <button type="submit" id="submit-btn">Valider le panier</button>
-      </form>
+          <button type="submit" id="submit-btn">Valider le panier</button>
+        </form> -->
+        <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
+        <form class="cart-form" action="post" type="submit">
+          <div class="cart-form__group">
+            <label for="firstname">Prénom : </label>
+            <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}"
+              required />
+          </div>
+          <div class="cart-form__group">
+            <label for="name">Nom : </label>
+            <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
+          </div>
+          <div class="cart-form__group">
+            <label for="address">Adresse : </label>
+            <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
+          </div>
+          <div class="cart-form__group">
+            <label for="city">Ville : </label>
+            <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
+          </div>
+          <div class="cart-form__group">
+            <label for="email">Email : </label>
+            <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}"
+              placeholder="exemple@email.com" maxlength="30" required />
+          </div>
+          <button id="submit-btn">Valider le panier</button>
+        </form>
 
       </div>
     </div>

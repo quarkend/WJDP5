@@ -1,14 +1,12 @@
 const section = document.querySelector(".cart-section");
-
+let total = 0;
 showCart();
 
 /* Affichage du contenu du panier, des boutons de suppression et d'annulation du panier ainsi que du formulaire forcontact */
 
 function showCart() {
-  let total = 0;
-
-  if (localStorage.getItem("cartItems") !== null) {
-    let products = JSON.parse(localStorage.getItem("cartItems"));
+  if (localStorage.getItem("panier") !== null) {
+    let products = JSON.parse(localStorage.getItem("panier"));
     // <tbody> : l'élément de corps d'un tableau
 
     section.insertAdjacentHTML(
@@ -89,43 +87,45 @@ function showCart() {
           <div class="text-right"><button class="clear-panier cart-section__cancelCart btn btn-danger">Vider le panier</button></div>
         </div>
       </div>
+      
 
   `
     );
-//     section.insertAdjacentHTML(
-//         "beforeend",` 
-//          <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
-//         <form class="cart-form" method="post">
-//           <div class="cart-form__group">
-//               <label for="firstname">Prénom : </label>
-//               <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}" required />
-//           </div>
-//           <div class="cart-form__group">
-//               <label for="name">Nom : </label>
-//               <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
-//           </div>
-//           <div class="cart-form__group">
-//               <label for="address">Adresse  : </label>
-//               <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
-//           </div>
-//           <div class="cart-form__group">
-//               <label for="city">Ville : </label>
-//               <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
-//           </div>
-//           <div class="cart-form__group">
-//               <label for="email">Email : </label>
-//               <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" placeholder="exemple@email.com" maxlength="30" required />
-//           </div>
-//          <button type="submit" id="submit-btn">Valider le panier</button>
-//       </form>
-// `
-//       );
-    const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
-    supprimerUnBtn.forEach((btn) => {
-      btn.addEventListener("click", (event) => {
-        decrementerProduct(event, products);
-      });
-    });
+    // section.insertAdjacentHTML(
+    //   "beforeend",
+    //   `
+    //          <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
+    //         <form class="cart-form" method="post">
+    //           <div class="cart-form__group">
+    //               <label for="firstname">Prénom : </label>
+    //               <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}" required />
+    //           </div>
+    //           <div class="cart-form__group">
+    //               <label for="name">Nom : </label>
+    //               <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
+    //           </div>
+    //           <div class="cart-form__group">
+    //               <label for="address">Adresse  : </label>
+    //               <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
+    //           </div>
+    //           <div class="cart-form__group">
+    //               <label for="city">Ville : </label>
+    //               <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
+    //           </div>
+    //           <div class="cart-form__group">
+    //               <label for="email">Email : </label>
+    //               <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" placeholder="exemple@email.com" maxlength="30" required />
+    //           </div>
+    //          <button type="submit" id="submit-btn">Valider le panier</button>
+    //       </form>
+    // `
+    // );
+    // const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
+    // supprimerUnBtn.forEach((btn) => {
+    //   btn.addEventListener("click", (event) => {
+    //     decrementerProduct(event, products);
+    //   });
+    // });
 
     const supprimerBtn = document.querySelectorAll(".cart-section__delete");
     supprimerBtn.forEach((btn) => {
@@ -179,22 +179,22 @@ function decrementerProduct(event, products) {
     // On peut ainsi vider ou remplacer une partie d'un tableau.
     products.splice(l, 1);
     if (products.length === 0) {
-      localStorage.removeItem("cartItems");
+      localStorage.removeItem("panier");
     } else {
-      localStorage.setItem("cartItems", JSON.stringify(products));
+      localStorage.setItem("panier", JSON.stringify(products));
     }
   } else {
-    localStorage.setItem("cartItems", JSON.stringify(products));
+    localStorage.setItem("panier", JSON.stringify(products));
   }
 
-  console.log(localStorage.getItem("cartItems"));
+  console.log(localStorage.getItem("panier"));
   refreshSectionAndCart();
 }
 /*Augmente de 1 la quantité d'un même produit. */
 function incrementerProduct(event, products) {
   let l = event.target.classList[1].slice(-1);
   products[l].quantity++;
-  localStorage.setItem("cartItems", JSON.stringify(products));
+  localStorage.setItem("panier", JSON.stringify(products));
   refreshSectionAndCart();
 }
 
@@ -205,16 +205,16 @@ function incrementerProduct(event, products) {
 function supprimerProduct(event, products) {
   let l = event.target.classList[1].slice(-1);
   products.splice(l, 1);
-  localStorage.setItem("cartItems", JSON.stringify(products));
+  localStorage.setItem("panier", JSON.stringify(products));
   if (products.length === 0) {
-    localStorage.removeItem("cartItems");
+    localStorage.removeItem("panier");
   }
   refreshSectionAndCart();
 }
 
 /* Annulation de tout le panier */
 function clearCart() {
-  localStorage.removeItem("cartItems");
+  localStorage.removeItem("panier");
   refreshSectionAndCart();
 }
 
@@ -237,8 +237,8 @@ function refreshSectionAndCart() {
 //   };
 
 //   let products = [];
-//   if (localStorage.getItem("setItems") !== null) {
-//     let produitObj = JSON.parse(localStorage.getItem("setItems"));
+//   if (localStorage.getItem("panier") !== null) {
+//     let produitObj = JSON.parse(localStorage.getItem("panier"));
 
 //     produitObj.forEach((produit) => {
 //       products.push(produit._id);
@@ -255,34 +255,31 @@ function refreshSectionAndCart() {
 //   postCmd(formulaireProduit);
 // }
 
-
 function submitFormControl() {
-    let contact = {
-        firstName: document.getElementById("firstname").value,
-        lastName: document.getElementById("name").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        email: document.getElementById("email").value,
-      };
-    let products = [];
-    if (localStorage.getItem("setItems") !== null) {
-      let produitObj = JSON.parse(localStorage.getItem("setItems"));
-  
-      produitObj.forEach((produit) => {
-        products.push(produit._id);
-        console.log(produit._id);
-      });
-      console.log(postCmd(formulaireProduit));
-    }
-  
-    let formulaireProduit = JSON.stringify({
-      contact,
-      products,
+  let contact = {
+    firstName: document.getElementById("firstname").value,
+    lastName: document.getElementById("name").value,
+    address: document.getElementById("address").value,
+    city: document.getElementById("city").value,
+    email: document.getElementById("email").value,
+  };
+  let products = [];
+  if (localStorage.getItem("panier") !== null) {
+    let produitObj = JSON.parse(localStorage.getItem("panier"));
+
+    produitObj.forEach((produit) => {
+      products.push(produit._id);
     });
-  
-    postCmd(formulaireProduit);
   }
-  
+
+  let formulaireProduit = JSON.stringify({
+    contact,
+    products,
+  });
+
+  postCmd(formulaireProduit);
+  // console.log(formulaireProduit);
+}
 
 /*
     Requête POST
@@ -291,7 +288,7 @@ function submitFormControl() {
     Changement de page -> confirmation.html
 */
 function postCmd(formulaireProduit) {
-  fetch("http://localhost:3000/api/teddies/order/", {
+  fetch("http://localhost:3000/api/teddies/order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -302,10 +299,12 @@ function postCmd(formulaireProduit) {
     .then((response) => {
       return response.json();
     })
+
     .then((res) => {
       localStorage.setItem("contact", JSON.stringify(res.contact));
+      // localStorage.setItem("products", JSON.stringify(res.products));
       localStorage.setItem("total", JSON.stringify(total));
-      localStorage.removeItem("setItems");
+      localStorage.removeItem("panier");
       window.location.replace("./confirmation.html");
     })
     .catch((e) => {
@@ -313,21 +312,28 @@ function postCmd(formulaireProduit) {
       console.log(e);
     });
 }
+// var requestURL = "http://localhost:3000/api/teddies/order";
+// var request = new XMLHttpRequest();
+// request.open("GET", requestURL);
+// request.send();
+// request.onload = function () {
+//   var formulaireProduit = request.response;
+
+//   postCmd(formulaireProduit);
+// };
 
 // .then((res) => {
 //     localStorage.setItem("contact", JSON.stringify(res.contact));
 //     localStorage.setItem("total", JSON.stringify(total));
-//     localStorage.removeItem("setItems");
+//     localStorage.removeItem("panier");
 //     window.location.replace("../pages/confirmation.html");
 //   })
 //   return res.status(201).json({
 //       contact: req.body.contact,
 //       products: teddies,
-   
+
 //     })
 // }
-
-
 
 // // Ajouter un événement ‘submit’à l'entrée du formulaire:
 // // Saisissez l'entrée du formulaire value:.
@@ -370,15 +376,15 @@ function postCmd(formulaireProduit) {
 
 // //     };
 // //     let products = [];
-// //     if (localStorage.getItem('cartItems') !== null) {
+// //     if (localStorage.getItem('panier') !== null) {
 // //       formulaireContact = [];
 // //     } else {
-// //       formulaireContact = json.parse(localStorage.getItem('cartItems'))
+// //       formulaireContact = json.parse(localStorage.getItem('panier'))
 
 // //     }
 
 // //     products.push(formulaireContact);
-// //     localStorage.setItem('cartItems', JSON.stringify(products))
+// //     localStorage.setItem('panier', JSON.stringify(products))
 
 // //   })
 // //   sendData(data);
