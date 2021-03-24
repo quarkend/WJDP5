@@ -303,6 +303,7 @@ function postCmd(formulaireProduit) {
     .then((res) => {
       localStorage.setItem("contact", JSON.stringify(res.contact));
       // localStorage.setItem("products", JSON.stringify(res.products));
+      localStorage.setItem("orderId", JSON.stringify(res.orderId));
       localStorage.setItem("total", JSON.stringify(total));
       localStorage.removeItem("panier");
       window.location.replace("./confirmation.html");

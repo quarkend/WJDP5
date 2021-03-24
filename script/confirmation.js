@@ -10,17 +10,17 @@ confirmation.insertAdjacentHTML(
     <h2>Confirmation de la commande : </h2>
     <ul>
         <li class="confirmation-section__coord">Vos coordonnées : </li>
-        <li>Nom : ${contact.lastName}</li>
+        <li>Nom : ${contact.latsName}</li>
         <li>Prénom : ${contact.firstName}</li>
         <li>Adresse : ${contact.address}</li>
         <li>Ville : ${contact.city}</li>
         <li>Email : ${contact.email}</li>
     </ul>
-    // <h3>Total : ${(total / 100).toFixed(2).replace(".", ",")} €</h3>
-    <h3>Numéro de la commande : </br> ${orderId}</h3>
+    <h3>Total : ${(total / 100).toFixed(2).replace(".", ",")} €</h3>
+    <h3>Numéro de la commande :</br>${orderId}</h3>
     <p> Numéro de référence de facture d'achat  </p>
 `
 );
-localStorage.removeItem("contact");
-localStorage.removeItem("total");
-localStorage.removeItem("orderId");
+// localStorage.removeItem("contact");
+// localStorage.removeItem("total");
+// localStorage.removeItem("orderId");
