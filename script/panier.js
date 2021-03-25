@@ -65,67 +65,40 @@ function showCart() {
     section.insertAdjacentHTML(
       "beforeend",
       `
-   <div class="row">
-        <div class="col-md-12 mt-3">
-          <h4>Votre commande</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mt-3">
-                        Nombre de produit(s) dans le panier : <span class="total-count"></span>
-          <br /><br />
-          <table width="100%" class="show-panier" id="product-card"></table>
-          <br />
-          <br />
-          <div>*Prix total: <b><span class="total-panier  cart-section__total" id="prix_total">${(
-            total / 100
-          )
-            .toFixed(2)
-            .replace(".", ",")} €</p></span></b></div>
-          <br />
-          <i id="livraison-detail">*Livraison incluse</i>
-          <div class="text-right"><button class="clear-panier cart-section__cancelCart btn btn-danger">Vider le panier</button></div>
-        </div>
-      </div>
-      
+            <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
+              <form class="cart-form" method="post">
+                <div class="cart-form__group">
+                    <label for="firstname">Prénom : </label>
+                    <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}" required />
+                </div>
+                <div class="cart-form__group">
+                    <label for="name">Nom : </label>
+                    <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
+                </div>
+                <div class="cart-form__group">
+                    <label for="address">Adresse  : </label>
+                    <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
+                </div>
+                <div class="cart-form__group">
+                    <label for="city">Ville : </label>
+                    <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
+                </div>
+                <div class="cart-form__group">
+                    <label for="email">Email : </label>
+                    <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" placeholder="exemple@email.com" maxlength="30" required />
+                </div>
+             <button type="submit" onClick="submitFormControl()(this.form)">Place Order</button>
+            </form>
 
-  `
+    `
     );
-    // section.insertAdjacentHTML(
-    //   "beforeend",
-    //   `
-    //          <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
-    //         <form class="cart-form" method="post">
-    //           <div class="cart-form__group">
-    //               <label for="firstname">Prénom : </label>
-    //               <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}" required />
-    //           </div>
-    //           <div class="cart-form__group">
-    //               <label for="name">Nom : </label>
-    //               <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
-    //           </div>
-    //           <div class="cart-form__group">
-    //               <label for="address">Adresse  : </label>
-    //               <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
-    //           </div>
-    //           <div class="cart-form__group">
-    //               <label for="city">Ville : </label>
-    //               <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
-    //           </div>
-    //           <div class="cart-form__group">
-    //               <label for="email">Email : </label>
-    //               <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" placeholder="exemple@email.com" maxlength="30" required />
-    //           </div>
-    //          <button type="submit" id="submit-btn">Valider le panier</button>
-    //       </form>
-    // `
-    // );
-    // const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
-    // supprimerUnBtn.forEach((btn) => {
-    //   btn.addEventListener("click", (event) => {
-    //     decrementerProduct(event, products);
-    //   });
-    // });
+
+    const supprimerUnBtn = document.querySelectorAll(".cart-section__remove");
+    supprimerUnBtn.forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        decrementerProduct(event, products);
+      });
+    });
 
     const supprimerBtn = document.querySelectorAll(".cart-section__delete");
     supprimerBtn.forEach((btn) => {
@@ -143,14 +116,20 @@ function showCart() {
       });
     });
 
-    const cancelCartBtn = document.querySelector(".cart-section__cancelCart");
-    cancelCartBtn.addEventListener("click", () => {
-      clearCart();
-    });
+    // const cancelCartBtn = document.querySelector(".cart-section__cancelCart");
+    // cancelCartBtn.addEventListener("click", () => {
+    //   clearCart();
+    // });
+    // document.theForm.submit();ne fonctionne pas, vous devriez plutôt utiliser
+    //  document.getElementById("theForm").submit();
+    //  et spécifier l'ID du formulaire en HTML, par exemple:
+    //  <form id="theForm">(content)</form>
 
     const form = document.querySelector(".cart-form");
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
+    form.addEventListener("submit", (e) => {
+      // log.textContent = `Form Submitted! Time stamp: ${e.timeStamp}`;
+      // console.log(`Form Submitted! Time stamp: ${e.timeStamp}`);
+      e.preventDefault();
       submitFormControl();
     });
   } else {
@@ -167,6 +146,22 @@ function showCart() {
     );
   }
 }
+// // List all onclick handlers of all anchor elements:
+// $("a").listHandlers("onclick", console.info);
+
+// // List all handlers for all events of all elements:
+// $("*").listHandlers("*", console.info);
+
+// // Write a custom output function:
+// $("#whatever").listHandlers("click", function (element, data) {
+//   $("body").prepend(
+//     "<br />" + element.nodeName + ": <br /><pre>" + data + "</pre>"
+//   );
+// });
+// window.addEventListener("load", () => {
+//   console.log("All assets are loaded");
+// });
+
 /* Diminue de 1 la quantité d'un même produit. S'il passe à 0 alors le produit est supprimé du panier */
 function decrementerProduct(event, products) {
   let l = event.target.classList[1].slice(-1);

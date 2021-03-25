@@ -21,6 +21,6 @@ confirmation.insertAdjacentHTML(
     <p> Numéro de référence de facture d'achat  </p>
 `
 );
-// localStorage.removeItem("contact");
-// localStorage.removeItem("total");
-// localStorage.removeItem("orderId");
+localStorage.removeItem("contact");
+localStorage.removeItem("total");
+localStorage.removeItem("orderId");
