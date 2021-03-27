@@ -66,29 +66,33 @@ function showCart() {
       "beforeend",
       `
             <p class="">Veuillez remplir le formulaire suivant afin de valider la commande : </p>
-              <form class="cart-form" method="post">
-                <div class="cart-form__group">
-                    <label for="firstname">Prénom : </label>
-                    <input id="firstname" type="text" placeholder="Votre prénom" maxlength="30" pattern="[A-Za-z]{2,}" required />
-                </div>
-                <div class="cart-form__group">
-                    <label for="name">Nom : </label>
-                    <input id="name" type="text" placeholder="Votre nom" maxlength="50" pattern="[A-Za-z]{2,}" required />
-                </div>
-                <div class="cart-form__group">
-                    <label for="address">Adresse  : </label>
-                    <input id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
-                </div>
-                <div class="cart-form__group">
-                    <label for="city">Ville : </label>
-                    <input id="city" type="text" placeholder="Votre ville" maxlength="30" required />
-                </div>
-                <div class="cart-form__group">
-                    <label for="email">Email : </label>
-                    <input id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" placeholder="exemple@email.com" maxlength="30" required />
-                </div>
-             <button type="submit" onClick="submitFormControl()(this.form)">Place Order</button>
-            </form>
+        <form id="form1" method="post">
+          <br>
+          <input class="form-control" id="firstname" type="text" placeholder="Votre prénom" maxlength="30"
+            pattern="[A-Za-z]{2,}" required />
+
+          <br>
+
+          <input class="form-control" id="name" type="text" placeholder="Votre nom" maxlength="50"
+            pattern="[A-Za-z]{2,}" required />
+
+          <br>
+
+          <input class="form-control" id="address" type="text" placeholder="Votre adresse" maxlength="200" required />
+
+          <br>
+
+          <input class="form-control" id="city" type="text" placeholder="Votre ville" maxlength="30" required />
+
+
+          <br>
+          <input class="form-control" id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}"
+            placeholder="exemple@email.com" maxlength="30" required />
+          <br>
+
+           <button class="order btn btn-success float-right" type="submit" onClick="  submitFormControl()(this.form)">Place Order</button>
+            
+        </form>
 
     `
     );
@@ -125,7 +129,8 @@ function showCart() {
     //  et spécifier l'ID du formulaire en HTML, par exemple:
     //  <form id="theForm">(content)</form>
 
-    const form = document.querySelector(".cart-form");
+    const form = document.querySelector("form1");
+    document.form1.submit();
     form.addEventListener("submit", (e) => {
       // log.textContent = `Form Submitted! Time stamp: ${e.timeStamp}`;
       // console.log(`Form Submitted! Time stamp: ${e.timeStamp}`);
