@@ -13,20 +13,28 @@ function showCart() {
       "afterbegin",
       `
             <h2>Teddies</h2>
-            <table class="cart-section__table">
+             <div class="container mb-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped cart-section__table">
               <thead>
-              <tr>
-                <th scope="col"> </th>
+             
+                <th scope="col">In stock</th>
                 <th scope="col">Produit</th>
-                <th scope="col">prix</th>
-                <th scope="col" class="text-center">Quantite</th>
-                <th scope="col" class="text-right">supprimer</th>
-                <th> </th>
-              </tr>
-            </thead>
+                 <th scope="col">Coleur</th>
+                <th class="text-center"scope="col">prix</th>
+                <th  class="text-right"scope="col">Quantite</th>
+                <th class="text-right" scope="col" >supprimer</th>
+             </thead>
          <tbody class="cart-section__tbody">
              </tbody>
-            </table>
+              </table>
+            </div>
+            </div>
+          
+            </div>
+            </div>
     `
     );
     let tbody = document.querySelector(".cart-section__tbody");
@@ -34,29 +42,29 @@ function showCart() {
     products.forEach((product, l) => {
       total = total + parseInt(product.price) * parseInt(product.quantity);
 
-      /* <td><input class="form-control" type="text" value="" />${l}</td>*/
-      //   <td>In stock</td>
-      //        <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
       /* La classe product-l nous permet de garder la valeur de l'l du produit. Il sera récupéré dans la fonction deleteProduct */
       tbody.insertAdjacentHTML(
         "beforeend",
         `
-                <tr>
+                  <tr>
+                   <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
                     <td>${product.name}</td>
-               
-                    <td class="text-right"><button class="cart-section__remove  product-${l}">-
+                     <td>${product.selectedColor}</td>
+
+                     <td class="text-center">${(
+                       (product.price * product.quantity) /
+                       100
+                     )
+                       .toFixed(2)
+                       .replace(".", ",")} €</td>
+                            <td class="text-right"><button class="cart-section__remove  product-${l}">-
                     </button>${
                       product.quantity
-                    }<button class="cart-section__add product-${l}">+</button></td>
-                 
-                    <td>${((product.price * product.quantity) / 100)
-                      .toFixed(2)
-                      .replace(".", ",")} €</td>
-                    <td><button class="cart-section__delete product -${l}">${
-          product.quantity
-        }</button></td>
-                <td class="text-right"><button class="btn btn-sm btn-danger cart-section__delete product-${l}"><i class="fa fa-trash"></i> </button>
-                </td>
+                    }<button class="cart-section__add product-${l}">+</button>
+                    </td>
+               
+                      <td class="text-right"><button class="btn btn-sm btn-danger cart-section__delete product-${l}"><i class="fa fa-trash"></i> </button>
+                        </td>
                     </tr>
             `
       );
@@ -90,7 +98,7 @@ function showCart() {
             placeholder="exemple@email.com" maxlength="30" required />
           <br>
 
-           <button class="order btn btn-success float-right" type="submit" onClick="  submitFormControl()(this.form)">Place Order</button>
+           <button class="order btn btn-success float-right" type="submit">Place Order</button>
             
         </form>
 
@@ -128,10 +136,27 @@ function showCart() {
     //  document.getElementById("theForm").submit();
     //  et spécifier l'ID du formulaire en HTML, par exemple:
     //  <form id="theForm">(content)</form>
+    // window.onload = function () {
+    //   alert("window.onload");
+    // };
 
-    const form = document.querySelector("form1");
-    document.form1.submit();
-    form.addEventListener("submit", (e) => {
+    // if (window.addEventListener) {
+    //   window.addEventListener(
+    //     "load",
+    //     function () {
+    //       alert("addEventListener");
+    //     },
+    //     false
+    //   );
+    // } else if (window.attachEvent) {
+    //   // IE < 9
+    //   window.attachEvent("onload", function () {
+    //     alert("attachEvent");
+    //   });
+    // }
+    const form1 = document.querySelector("#form1");
+
+    form1.addEventListener("submit", (e) => {
       // log.textContent = `Form Submitted! Time stamp: ${e.timeStamp}`;
       // console.log(`Form Submitted! Time stamp: ${e.timeStamp}`);
       e.preventDefault();

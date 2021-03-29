@@ -21,9 +21,9 @@
 .show-cart li {
   display: flex;
 }
-.card {
+/* .card {
   margin-bottom: 20px;
-}
+} */
 .card-img-top {
   width: 200px;
   height: 200px;
