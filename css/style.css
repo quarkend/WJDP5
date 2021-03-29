@@ -29,3 +29,12 @@
   height: 200px;
   align-self: center;
 }
+footer {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #579c87;
+  border-top: 1px solid #a1c181;
+}

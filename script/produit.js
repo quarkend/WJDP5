@@ -74,6 +74,7 @@ function addToCart(product) {
   let saveToCart = {
     _id: product._id,
     name: product.name,
+    imageUrl: product.imageUrl,
     price: product.price,
     quantity: 1,
     selectedColor: product.selectedColor,
@@ -94,16 +95,16 @@ function addToCart(product) {
         product.selectedColor === pro.selectedColor
       ) {
         pro.quantity++;
-        newDifProduct = false;
+        newProduct = false;
       }
     });
 
-    if (newDifProduct) panier.push(saveToCart);
+    if (newProduct) panier.push(saveToCart);
     // La méthode setItem() de l'interface Storage, lorsque lui sont passées le duo clé-valeur, les ajoute à l'emplacement de stockage,
     // sinon elle met à jour la valeur si la clé existe déjà.
 
     localStorage.setItem("panier", JSON.stringify(panier));
   }
-
+  window.location.replace("../pages/panier.html");
   reinisialiserCart();
 }

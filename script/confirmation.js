@@ -10,7 +10,7 @@ confirmation.insertAdjacentHTML(
     <h2>Confirmation de la commande : </h2>
     <ul>
         <li class="confirmation-section__coord">Vos coordonnées : </li>
-        <li>Nom : ${contact.latsName}</li>
+        <li>Nom : ${contact.lastName}</li>
         <li>Prénom : ${contact.firstName}</li>
         <li>Adresse : ${contact.address}</li>
         <li>Ville : ${contact.city}</li>

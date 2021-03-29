@@ -47,10 +47,13 @@ function showCart() {
         "beforeend",
         `
                   <tr>
-                   <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
+                   
+                   <td><img width = "50"  id="img-product" class="img-top" src="${
+                     product.imageUrl
+                   }"alt=""> </td>
                     <td>${product.name}</td>
-                     <td>${product.selectedColor}</td>
-
+               
+<td>${product.selectedColor}</td>
                      <td class="text-center">${(
                        (product.price * product.quantity) /
                        100
