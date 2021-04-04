@@ -25,13 +25,12 @@ function askTeddies(product) {
     "afterbegin",
     `
        <article class=" card nav-bg-color  border-dark ">
-            <img id="img-product" class="img-top" src="${
-              product.imageUrl
-            }"alt="">
+            <img id="img-product" src="${product.imageUrl}"alt="">
                 <aside class="card-body">
                     <h3 id="nom-product" class="card-title">${product.name}
                     </h3>
-                     <p>${product.description}</p>
+                     <p> Ce nounours en peluche super doux est fabriqué avec 
+                     des matériaux de haute qualité.</p>
                    <div class="btn btn-primary font-weight-bold">
                         ${(product.price / 100).toFixed(2).replace(".", ",")}€
                         </div>

@@ -1,4 +1,5 @@
-/* Récupération des différents éléments dans le localStorage afin de les afficher au chargement de la page */
+/* Récupération des différents éléments dans le localStorage afin de 
+les afficher au chargement de la page */
 const confirmation = document.querySelector(".confirmation-section");
 const contact = JSON.parse(localStorage.getItem("contact"));
 const orderId = JSON.parse(localStorage.getItem("orderId"));
