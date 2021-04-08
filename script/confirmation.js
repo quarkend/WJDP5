@@ -4,7 +4,6 @@ const confirmation = document.querySelector(".confirmation-section");
 const contact = JSON.parse(localStorage.getItem("contact"));
 const orderId = JSON.parse(localStorage.getItem("orderId"));
 const total = JSON.parse(localStorage.getItem("total"));
-
 confirmation.insertAdjacentHTML(
   "beforeend",
   `
