@@ -8,20 +8,23 @@ fetch(apiUrl)
   });
 function setProduct(product) {
   return `
-   <div id="product-card" class="col-sm-6 col-md-4 ">
+   <div id="product-card" class="col-sm-6 col-md-4 m-2">
         <article class=" card nav-bg-color  border-dark">
+           <h3  id="nom-product" class="text-center card-title">${product.name}
+                    </h3>
             <img id="img-product" class="img-top" src="${product.imageUrl
     }"alt="Photo Teddy">
-                <aside class="card-body">
-                    <h3 id="nom-product" class="card-title">${product.name}
-                    </h3>
-                    <div class="btn btn-primary font-weight-bold">
+                <aside class="card-body ">
+                 
+                    <div class="text-center">
                         ${(product.price / 100).toFixed(2).replace(".", ",")}€
                         </div>
-                    <button class="btn btn-success float-right font-weight-bold">
+                       <div class="text-center"> 
+                    <button class=" btn btn-success font-weight-bold">
            <a class="product__btn" href="../pages/produit.html?${product._id}">
            Voir l'offre</a>
                     </button>
+                    </div>
                 </aside>
                 </article>
         </div>

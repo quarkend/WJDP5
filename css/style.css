@@ -5,22 +5,18 @@
 }
 
 #product-card {
-  margin: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+
   padding: 1rem;
   box-shadow: 1px 1px 10px;
   border-radius: 1rem;
-
   color: #444;
 }
 .show-cart li {
   display: flex;
 }
-#productList {
-  margin-bottom: 5rem;
+.mb-6 {
+  margin-bottom: 6rem !important;
 }
-
 .cart-section__remove {
   background-color: rgba(173, 137, 143, 0.801);
   margin-right: 0.2rem;
@@ -30,21 +26,19 @@
   margin-left: 0.2rem;
 }
 .img-top {
-  width: 100%;
-  height: 200px;
-  align-self: center;
+  width: auto ;
+  height: auto;
+  
 }
 footer {
   position: fixed;
   bottom: 0;
 }
 .product-section {
-  margin-top: 6rem;
+  margin: auto;
 }
 .product__btn {
-  
   color: #eee;
-
 }
 .product__btn:hover {
   cursor: pointer;

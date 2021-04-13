@@ -31,12 +31,13 @@ function askTeddies(product) {
                     </h3>
                      <p> Ce nounours en peluche super doux est fabriqué avec 
                      des matériaux de haute qualité.</p>
-                   <div class="btn btn-primary font-weight-bold">
+                   <div class="text-center">
                         ${(product.price / 100).toFixed(2).replace(".", ",")}€
                         </div>
-                  <label for="color-select">Choisir une couleur</label>
-        <select class="product-section__select" name="colors" id="color-select"></select>
-        <button class="addToCart btn btn-success float-right">Ajouter au panier <i class="fas fa-shopping-cart"></i></button> 
+                  <label for="color-select"></label>
+        <div class="text-center"> <select class="product-section__select" name="colors" id="color-select"></select> </div>
+         <div class="text-center"> <button class="addToCart btn btn-success ">Ajouter au panier <i class="fas fa-shopping-cart"></i></button> 
+          </div>
                 </aside>
                 </article>  
                 </div> 

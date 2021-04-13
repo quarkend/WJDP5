@@ -59,10 +59,38 @@ function showCart() {
                       <td class="text-right"><button class="btn btn-sm btn-danger 
                       cart-section__delete product-${l}"><i class="fa fa-trash"></i> </button>
                         </td>
+                        
                     </tr>
+                           
+                    
             `
       );
     });
+    section.insertAdjacentHTML(
+      "beforeend",
+      `
+   <div class="row">
+        <div class="col-md-12 mt-3">
+          <h4>Votre commande</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+        
+          <div>*Prix total: <b><span class="total-panier  cart-section__total" id="prix_total">${(
+        total / 100
+      )
+        .toFixed(2)
+        .replace(".", ",")} €</p></span></b></div>
+          <br />
+        
+        
+        </div>
+      </div>
+
+  `
+    );
+
     section.insertAdjacentHTML(
       "beforeend",
       `
@@ -87,8 +115,11 @@ function showCart() {
           <input class="form-control" id="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}"
             placeholder="exemple@email.com" maxlength="30" required />
           <br>
+    <button class="clear-panier cart-section__cancelCart btn btn-danger float-left">Vider le panier</button>
+        
            <button class="order btn btn-success float-right" type="submit">Place Order</button>
                   </table>
+                  
             </div>
             </div>
             </div>
@@ -115,6 +146,10 @@ function showCart() {
       btn.addEventListener("click", (event) => {
         incrementerProduct(event, products);
       });
+    });
+    const cancelCartBtn = document.querySelector(".cart-section__cancelCart");
+    cancelCartBtn.addEventListener("click", () => {
+      clearCart();
     });
     const form1 = document.querySelector("#form1");
     form1.addEventListener("submit", (e) => {
@@ -211,7 +246,6 @@ function submitFormControl() {
     products,
   });
   postCmd(formulaireProduit);
-  // console.log(formulaireProduit);
 }
 /*
     Requête POST
