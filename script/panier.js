@@ -9,7 +9,7 @@ function showCart() {
     section.insertAdjacentHTML(
       "afterbegin",
       `
-            <h2>Teddies</h2>
+            <h2>PANIER</h2>
              <div class="container mb-4">
     <div class="row">
       <div class="col-12">
@@ -117,7 +117,7 @@ function showCart() {
           <br>
     <button class="clear-panier cart-section__cancelCart btn btn-danger float-left">Vider le panier</button>
         
-           <button class="order btn btn-success float-right" type="submit">Place Order</button>
+           <button class="order btn btn-success float-right" type="submit">Valider Le Panier</button>
                   </table>
                   
             </div>
