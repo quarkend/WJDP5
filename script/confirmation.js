@@ -7,6 +7,7 @@ const total = JSON.parse(localStorage.getItem("total"));
 confirmation.insertAdjacentHTML(
   "beforeend",
   `
+        <p>Merci pour votre commande.</p>
     <h2>Confirmation de la commande : </h2>
     <ul>
         <li class="confirmation-section__coord">Vos coordonnées : </li>
@@ -19,6 +20,7 @@ confirmation.insertAdjacentHTML(
     <h3>Total : ${(total / 100).toFixed(2).replace(".", ",")} €</h3>
     <h3>Numéro de la commande :</br>${orderId}</h3>
     <p> Numéro de référence de facture d'achat  </p>
+    <p>Merci pour votre commande</p>
 `
 );
 localStorage.removeItem("contact");
